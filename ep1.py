@@ -61,8 +61,14 @@ def main():
 
         # Aluno A: substitua este comentário pelo código para imprimir 
         # o cenário atual.
-
+        titulo = cenario_atual['titulo']
+        print (titulo)
+        print ("-"*len(titulo))
+        descricao = cenario_atual ['descricao']
+        print (descricao)
         opcoes = cenario_atual['opcoes']
+        for k,v in opcoes.items():
+            print ("{0} - {1}".format(k,v))
         if len(opcoes) == 0:
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
