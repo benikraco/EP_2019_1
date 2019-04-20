@@ -3,7 +3,6 @@
 # Alunos: 
 # - aluno A: Fulano da Silva, fulanos@insper.edu.br
 # - aluno B: Sicrano de Almeida, sicranoa1@insper.edu.br
-from random import randint
 def carregar_cenarios():
     cenarios = {
         "inicio": {
@@ -11,7 +10,8 @@ def carregar_cenarios():
             "descricao": "Voce esta no saguao de entrada do insper",
             "opcoes": {
                 "andar professor": "Tomar o elevador para o andar do professor",
-                "biblioteca": "Ir para a biblioteca"
+                "biblioteca": "Ir para a biblioteca",
+                "tobogã": "Entrar no tobogã"
             }
         },
         "andar professor": {
@@ -19,7 +19,8 @@ def carregar_cenarios():
             "descricao": "Voce chegou ao andar da sala do seu professor",
             "opcoes": {
                 "inicio": "Tomar o elevador para o saguao de entrada",
-                "professor": "Falar com o professor"
+                "professor": "Falar com o professor",
+                "biblioteca":"Ir para a biblioteca",
             }
         },
         "professor": {
@@ -48,7 +49,8 @@ def carregar_cenarios():
             "titulo": "Sala de entidades",
             "descricao": "Você está na mesa com os veteranos do D.A. Vários itens estão espalhados pela mesa.",
             "opcoes":{
-                "inicio": "Voltar para o saguao de entrada"
+                "inicio": "Voltar para o saguao de entrada",
+                "biblioteca": "Ir para a biblioteca"
         },
             }
         }
@@ -68,24 +70,18 @@ def main():
         "na entrada do Insper, e quer procurar o professor para pedir um "
         "adiamento do EP (boa sorte...)")
     print()
-
     cenarios, nome_cenario_atual = carregar_cenarios()
-
     game_over = False
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
-
         # Aluno A: substitua este comentário pelo código para imprimir 
         # o cenário atual.
-        if cenario_atual != "início":
-            monstrinho = randint(0,10)
-        titulo = cenario_atual['titulo']
-        print (titulo)
-        print ("-"*len(titulo))
-        descricao = cenario_atual['descricao']
-        print (descricao)
-        opcoes = cenario_atual['opcoes']
-        if len(opcoes) == 0:
+        print (cenario_atual['titulo'])
+        print ("-"*len(cenario_atual['titulo']))
+        print (cenario_atual['descricao'])
+        import random
+        monstrinho=random.randint(0,3)
+        if len(cenario_atual['opcoes']) == 0:
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
         else:
@@ -94,41 +90,13 @@ def main():
             print ()
             print ("As suas opções são: ")
             print ()
-            for k,v in opcoes.items():
+            for k,v in cenario_atual['opcoes'].items():
                 print ("{0} - {1}".format(k,v))
             print ()
-            
-            while monstrinho == 1:
-                print ("Você encontrou um veterano!")
-                print ("Você tem 5 tentativas para acertar um número de 1 a 20 e assim desestabilizar o veterano.")
-                import random
-                a=random.randint(1,20)
-                b=int(input("Digite um valor entre 1 e 20: "))
-                while b<1 or b>20:
-                    print("Valor invalido")
-                    b=int(input("Digite um valor entre 1 e 20: "))
-                contador = 1
-                while b!=a and contador<5:
-                    contador+=1
-                    if b<a:
-                        print("Muito baixo")
-                    elif b>a:
-                        print("Muito alto")
-                    b=int(input("Digite um valor entre 1 e 20: "))
-                    while b<1 or b>20:
-                        print("Valor invalido")
-                        b=int(input("Digite um valor entre 1 e 20: "))
-                if contador == 5:
-                    print("Que pena, o veterano ficou consciente e te devorou!")
-                    monstrinho=0
-                    game_over = True
-                else:
-                    print("Você acertou em {0} tentativas. Agora o veterano acabou de descobrir que está de DP Linha! Você passou.".format(contador))
-                    monstrinho = 0
             escolha = str(input('Qual é a sua escolha?'))
-            itens = ['Protoboard','Arduíno','Computador','Chave']
-            if escolha in opcoes:
+            if escolha in cenario_atual['opcoes']:
                 nome_cenario_atual = escolha
+                itens = ['Protoboard','Arduíno','Computador','Chave']
                 if escolha == "sala secreta":
                     print ("Você encontrou alguns itens! Qual deseja levar?")
                     print ()
@@ -138,13 +106,10 @@ def main():
                     print ()
                     print ("As suas opções são: ")
                     print ()
-                    for k,v in opcoes.items():
+                    for k,v in cenario_atual['opcoes'].items():
                         print ("{0} - {1}".format(k,v))
                         print ()
-                        escolha = str(input('Qual é a sua escolha?'))
-                    else: 
-                        print("Sua indecisão foi sua ruína!")
-                        game_over=True
+                    escolha = str(input('Qual é a sua escolha?'))
             else:
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
