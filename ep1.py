@@ -71,6 +71,9 @@ def main():
         "adiamento do EP (boa sorte...)")
     print()
     cenarios, nome_cenario_atual = carregar_cenarios()
+    x=0
+    pontos_a={"hit points": 10, "pontos de ataque": 2,"pontos de defesa": 2}
+    pontos_b={"hit points": 4, "pontos de ataque": 1,"pontos de defesa":1}
     game_over = False
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
@@ -79,11 +82,47 @@ def main():
         print (cenario_atual['titulo'])
         print ("-"*len(cenario_atual['titulo']))
         print (cenario_atual['descricao'])
-        import random
-        monstrinho=random.randint(0,3)
+        
         if len(cenario_atual['opcoes']) == 0:
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
+        if cenario_atual == 'biblioteca':
+            print (cenario_atual['titulo'])
+            print ("-"*len(cenario_atual['titulo']))
+            print (cenario_atual['descricao'])
+            xa=[0,0,0]
+            xb=[0,0,0]
+            from random import randint
+            x= randint(1, 2)
+            if x==1:
+                print('Voce esta com os seus livros atrasados!')
+                print('Por este motivo, tera que lutar com a bibliotecaria...')
+                print ('Você tem {0} pontos'.format(pontos_a))
+                print ('A bibliotecária tem {0} pontos'.format(pontos_b))
+                decisao=input('Voce deseja entrar nesta batalha?(s para sim) ')
+                if decisao == 's':
+                     if pontos_a['hit points']>pontos_b['hit points']:
+                         if pontos_a['pontos de ataque']>pontos_b['pontos de defesa']:
+                             print('Aeee!!! Você ganhou com direito à um aumento de pontos de ataque! Pode continuar')
+                             xa=[0,pontos_b['pontos de defesa']-1,0]
+                             xb=[0,-2,-1]
+                         elif pontos_a['pontos de ataque']<pontos_b['pontos de defesa']:
+                            print('VOCE PERDEUUUUUUUU! infelizmente perdeu tambem um ponto de ataque...')
+                            xa=[0,-1,0]
+                         elif pontos_a['pontos de ataque']==pontos_b['pontos de defesa']:
+                            print('Voce empatou...')
+                     elif pontos_a['hit points']==pontos_b['hit points']:
+                        print('Que sorte... vocês empataram. Pode prosseguir.')
+                pontos_a["hit points"]+=xa[0]
+                pontos_a["pontos de ataque"]+=xa[1]
+                pontos_a["pontos de defesa"]+=xa[2]
+                pontos_b["hit points"]+=xb[0]
+                pontos_b["pontos de ataque"]+=xb[1]
+                pontos_b["pontos de defesa"]+=xb[2]
+            else:
+                print('que pena, voce voltara para o inicio...')
+                nome_cenario_atual='inicio'
+                
         else:
             # Aluno B: substitua este comentário e a linha abaixo pelo código
             # para pedir a escolha do usuário.
