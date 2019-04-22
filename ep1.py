@@ -1,8 +1,8 @@
 # EP 2019-1: Escape Insper
 #
 # Alunos: 
-# - aluno A: Fulano da Silva, fulanos@insper.edu.br
-# - aluno B: Sicrano de Almeida, sicranoa1@insper.edu.br
+# - aluno A: Beni Kracochansky, benik@alinsper.edu.br
+# - aluno B: Amanda Ades, amandaa2@al.insper.edu.br
 def carregar_cenarios():
     cenarios = {
         "inicio": {
@@ -100,11 +100,11 @@ def main():
     
     
     cenarios, nome_cenario_atual = carregar_cenarios()
-    x=0
+    x=1
     itens = []
     pontos_a={"hit points": 10, "pontos de ataque": 2,"pontos de defesa": 2}
     pontos_b={"hit points": 4, "pontos de ataque": 1,"pontos de defesa":1}
-    objetos = ["objetox","objetoy","objetoz"]
+    objetos = ["Ingresso para festa Madrelisa","Motor de carro","Panfleto da nova campanha do GAS"]
     game_over = False
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
@@ -127,7 +127,7 @@ def main():
             for k,v in cenario_atual['opcoes'].items():
                 print ("{0} - {1}".format(k,v))
             print ()
-            escolha = input('Qual é a sua escolha?')
+            escolha = input('Qual é a sua escolha? ')
             
             if escolha in opcoes:
                 nome_cenario_atual = escolha
@@ -135,34 +135,39 @@ def main():
                 cenario_atual = cenarios [nome_cenario_atual]
                 if escolha == "sala secreta":
                     x += 1 # Importar o código do monstrinho com randint 
-                    if "objetox" and "objetoy" in itens and x%2!= 0:
+                    print ()
+                    print (cenario_atual["titulo"])
+                    print ("-"*len(cenario_atual["titulo"]))
+                    print (cenario_atual["descricao"])
+                    print ()
+                    print ("Bem vindo à sala secreta...")
+                    print ()
+                    print ("A sala de entidades te recebe de braços abertos! Cada entidade te oferece um objeto." )
+                    print ()
+                    print ("Os objetos que o GAS, o D.A e o Baja se propuseram a doar a você são: {0}".format(objetos))
+                    dec = input ("Você deseja pegar algum objeto? (sim para pegar): ")
+                    while dec == "sim":
                         print ()
-                        print (cenario_atual["titulo"])
-                        print ("-"*len(cenario_atual["titulo"]))
-                        print (cenario_atual["descricao"])
-                        print ()
-                        print ("Bem vindo à sala secreta...")
-                        print ()
-                        print ("A sala de entidades te recebe de braços abertos! Cada entidade te oferece um objeto." )
-                        print ()
-                        print ("Os objetos que o GAS, o D.A e o Baja se propuseram a doar a você são: {0}".format(objetos))
-                        dec = input ("Você deseja pegar algum objeto? (sim para pegar): ")
-                        while dec == "sim":
-                            print ()
-                            obj = input ("Qual deles você quer??")
-                            itens.append (obj)
-                            print ("Objeto adicionado à sua mochila!")
-                            dec = input ("Você deseja pegar mais algum objeto? (sim para pegar): ")
-                            nome_cenario_atual = "sala secreta"
+                        obj = input ("Qual deles você quer??")
+                        itens.append (obj)
+                        print ("Objeto adicionado à sua mochila!")
+                        dec = input ("Você deseja pegar mais algum objeto? (sim para pegar): ")
+                        nome_cenario_atual = "sala secreta"
                             
                 if escolha == 'capsula de teletransporte': 
-                    print('Voce podera ir para onde quiser, desde que lembre o nome do lugar de cor!')
-                    print('Voce quer entrar nesta capsula?')
-                    print('Se voce digitar o nome do lugar errado voce morrera...')
-                    print('Digite s para continuar e n para voltar para o inicio')
-                    continuar=input('Voce quer continuar?' )
+                    print ()
+                    print ()
+                    print('Você poderá ir para onde quiser, desde que lembre o nome do lugar de cor!')
+                    print ()
+                    print('Você quer entrar nesta capsula?')
+                    print ()
+                    print('Caso você digite o nome do lugar errado você morrerá!')
+                    print ()
+                    print('Digite s para continuar e n para voltar ao início')
+                    continuar=input('Você deseja continuar? ')
+                    print ()
                     if continuar == 's':
-                        s_transporte=input('Para onde voce quer ir?' )
+                        s_transporte=input('Para onde você deseja ir? ')
                         if s_transporte == 'biblioteca':
                             nome_cenario_atual ='biblioteca'
                         elif s_transporte == 'tobogã':
@@ -242,8 +247,8 @@ def main():
                             elif pontos_a['hit points']==pontos_b['hit points']:
                                 print('Que sorte... vocês empataram. Pode prosseguir, voce voltara para o inicio.')
                         else:
-                            print('Ta com medinho????')
-                            print('Você voltara para o inicio')
+                            print('Tá com medinho????')
+                            print('Você voltará para o início')
                             nome_cenario_atual="inicio"
                         pontos_a["hit points"]+=xa[0]
                         pontos_a["pontos de ataque"]+=xa[1]
@@ -252,13 +257,43 @@ def main():
                         pontos_b["pontos de ataque"]+=xb[1]
                         pontos_b["pontos de defesa"]+=xb[2]
                 elif escolha == "andar professor": 
-                    nome_cenario_atual = "andar professor"
-                    cenario_atual = cenarios[nome_cenario_atual]
-                    opcoes = cenario_atual ["opcoes"]
-                    if escolha == "professor": #Aqui não está funcionando!
-                        nome_cenario_atual = "professor"
+                    if "Ingresso para festa Madrelisa" and "Motor de carro" in itens:
+                        print ()
+                        print ("Se você chegou aqui é porque tem o necessário.")
+                        nome_cenario_atual = "andar professor"
                         cenario_atual = cenarios[nome_cenario_atual]
                         opcoes = cenario_atual ["opcoes"]
+                    else:
+                        print ("Você ainda não tem o que é necessário para entrar no andar do professor")
+                        print ("Você retornará ao início e poderá refletir sobre como entrar na sala...")
+                        nome_cenario_atual = "inicio"
+                if escolha == "professor": #Aqui não está funcionando!
+                    nome_cenario_atual = "professor"
+                    cenario_atual = cenarios[nome_cenario_atual]
+                    opcoes = cenario_atual ["opcoes"]
+                if escolha == "sala secretíssima":
+                    print ("Sala do Marcos Lisboa")
+                    t = "-"*len("Sala do Marcos Lisboa")
+                    print (t)
+                    print ()
+                    print ("Você foi convocado para uma reunião com a Carol da Costa e o Marcos Lisboa.")
+                    print ()
+                    print ("Aqui o seu desejo se torna realidade (dentro do possível)")
+                    print ("Você pode receber hit points, pontos de ataque ou pontos de defesa. Basta digitar o que desejas e terás.")
+                    print ("Porém tome cuidado! Qualquer erro ortográfico e já era pra você.")
+                    a = input("O que você deseja? ")    
+                    if a == "hit points":
+                        pontos_a["hit points"] += 3
+                        print ("Você ganhou 3 hit points!")
+                    if a == "pontos de defesa":
+                        pontos_a["pontos de defesa"] += 2
+                        print ("Você ganhou 2 pontos de defesa!")
+                    if a == "pontos de ataque":
+                        pontos_a["pontos de defesa"] += 2
+                        print ("Você ganhou 2 pontos de ataque!")
+                    else:
+                        game_over = True
+                
 
                         
             else:
@@ -266,7 +301,6 @@ def main():
                 game_over = True
 
     print("Você morreu!")
-
 
 # Programa principal.
 if __name__ == "__main__":
