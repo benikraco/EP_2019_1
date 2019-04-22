@@ -47,6 +47,7 @@ def carregar_cenarios():
                 "inicio": "Voltar para o saguao de entrada",
                 "sala secreta": "Ir para a sala secreta",
                 "capsula de teletransporte":"Ir para a capsula"
+            }
         },
         "sala secreta": {
             "titulo": "Sala de entidades",
@@ -67,20 +68,21 @@ def carregar_cenarios():
                     "tobogã": "Entrar no tobogã",
                     "sala secreta": "Ir para a sala de entidades",
                     "capsula de teletransporte":"Ir para a capsula"
-            },
-        "capsula de teletransporte":{
-                "titulo":"Sala de transporte magico",
-                "descricao":"Esta capsula pode te levar para qualquer sala desde que voce saiba o nome da sala de cor!",
-                "opcoes":{
-                        "inicio": "Voltar para o saguao de entrada",
-                        "andar professor": "Ir para a sala do Toshi",
-                        "biblioteca": "Vá ler uns livros na biblioteca Telles",
-                        "tobogã": "Entrar no tobogã",
-                        "sala secreta": "Ir para a sala de entidades",}
-                }
             }
-        }
-    }
+        },
+        "capsula de teletransporte":{
+            "titulo":"Sala de transporte magico",
+            "descricao":"Bem vindo à capsula de teletransporte!",
+            "opcoes":{
+                    "inicio": "Voltar para o saguao de entrada",
+                    "andar professor": "Ir para a sala do Toshi",
+                    "biblioteca": "Vá ler uns livros na biblioteca Telles",
+                    "tobogã": "Entrar no tobogã",
+                    "sala secreta": "Ir para a sala de entidades"
+                    }
+            }
+            }
+    
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
@@ -152,44 +154,64 @@ def main():
                             print ("Objeto adicionado à sua mochila!")
                             dec = input ("Você deseja pegar mais algum objeto? (sim para pegar): ")
                             nome_cenario_atual = "sala secreta"
-                if escolha == 'capsula de teletransporte':
-                    print (cenario_atual['titulo'])
-                    print ("-"*len(cenario_atual['titulo']))
-                    print (cenario_atual['descricao'])
-                    print('voce podera ir para onde quiser, desde que lembre o nome de cor!')
-                    
-
+                            
+                if escolha == 'capsula de teletransporte': 
+                    print('Voce podera ir para onde quiser, desde que lembre o nome do lugar de cor!')
+                    print('Voce quer entrar nesta capsula?')
+                    print('Se voce digitar o nome do lugar errado voce morrera...')
+                    print('Digite s para continuar e n para voltar para o inicio')
+                    continuar=input('Voce quer continuar?' )
+                    if continuar == 's':
+                        s_transporte=input('Para onde voce quer ir?' )
+                        if s_transporte == 'biblioteca':
+                            nome_cenario_atual ='biblioteca'
+                        elif s_transporte == 'tobogã':
+                            nome_cenario_atual = 'tobogã'
+                        elif s_transporte == 'sala secreta':
+                            nome_cenario_atual = 'sala secreta'
+                        elif s_transporte == 'sala magica':
+                            nome_cenario_atual = 'sala magica'
+                        elif s_transporte == 'sala secretíssima':
+                            nome_cenario_atual = 'sala secretíssima'
+                        elif s_transporte == 'professor':
+                            nome_cenario_atual = 'professor'
+                        elif s_transporte == 'andar professor':
+                            nome_cenario_atual = 'andar professor'
+                        else:
+                            game_over=True
+                    if continuar == 'n':
+                        nome_cenario_atual=='inicio'
+        
                 if escolha =='tobogã':
                     print (cenario_atual['titulo'])
                     print ("-"*len(cenario_atual['titulo']))
                     print (cenario_atual['descricao'])
                     from random import randint
                     y=randint(1,2)
+                    contador=1
                     if y==1:
                         print ("Você encontrou um veterano que esta bloqueando a sua passagem pelo tobogã!")
                         print ("Você tem 5 tentativas para acertar um número de 1 a 20 e assim desestabilizar o veterano.")
                         n = randint(1,20)
                         b=int(input("Digite um valor entre 1 e 20: "))
-                        contador=1
                         while b<1 or b>20:
                             print("Valor invalido")
                             b=int(input("Digite um valor entre 1 e 20: "))
-                        contador = 1
                         while b!= n and contador<5:
                             contador+=1
                             if b<n:
                                 print("Muito baixo")
-                            if b>n:
+                            elif b>n:
                                 print("Muito alto")
-                                b=int(input("Digite um valor entre 1 e 20: "))
-                        while b<1 or b>20:
-                            print("Valor invalido")
                             b=int(input("Digite um valor entre 1 e 20: "))
+                            while b<1 or b>20:
+                                print("Valor invalido")
+                                b=int(input("Digite um valor entre 1 e 20: "))
                         if contador == 6:
                             print("Que pena, o veterano ficou consciente e te devorou!")
                             game_over = True
-                        else:
-                            print("Você acertou em {0} tentativas. Agora voce podera passar pelo toboga".format(contador))
+                        elif b==n:
+                            print("Você acertou em {0} tentativas. Agora voce podera passar pelo tobogã".format(contador))
                 if escolha == "biblioteca":
                     x += 1  # Importar o código do monstrinho com randint 
                     print (cenario_atual['titulo'])
