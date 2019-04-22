@@ -2,7 +2,7 @@
 #
 # Alunos: 
 # - aluno A: Beni Kracochansky, benik@alinsper.edu.br
-# - aluno B: Amanda Ades, amandaa2@al.insper.edu.br
+# - aluno B: Amanda Ades, amandaa2@insper.edu.br
 def carregar_cenarios():
     cenarios = {
         "inicio": {
@@ -46,7 +46,8 @@ def carregar_cenarios():
             "opcoes": {
                 "inicio": "Voltar para o saguao de entrada",
                 "sala secreta": "Ir para a sala secreta",
-                "capsula de teletransporte":"Ir para a capsula"
+                "capsula de teletransporte":"Ir para a capsula",
+                "sala secretíssima": "Você não sabe onde está se metendo..."
             }
         },
         "sala secreta": {
@@ -174,8 +175,6 @@ def main():
                             nome_cenario_atual = 'tobogã'
                         elif s_transporte == 'sala secreta':
                             nome_cenario_atual = 'sala secreta'
-                        elif s_transporte == 'sala magica':
-                            nome_cenario_atual = 'sala magica'
                         elif s_transporte == 'sala secretíssima':
                             nome_cenario_atual = 'sala secretíssima'
                         elif s_transporte == 'professor':
@@ -267,7 +266,7 @@ def main():
                         print ("Você ainda não tem o que é necessário para entrar no andar do professor")
                         print ("Você retornará ao início e poderá refletir sobre como entrar na sala...")
                         nome_cenario_atual = "inicio"
-                if escolha == "professor": #Aqui não está funcionando!
+                if escolha == "professor": 
                     nome_cenario_atual = "professor"
                     cenario_atual = cenarios[nome_cenario_atual]
                     opcoes = cenario_atual ["opcoes"]
