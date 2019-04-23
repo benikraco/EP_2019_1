@@ -133,6 +133,15 @@ def main():
                 opcoes = cenario_atual ["opcoes"]
                 cenario_atual = cenarios [nome_cenario_atual]
                 
+                if escolha == "inicio":
+                    print() 
+                    print ("-"*len(cenario_atual['titulo']))
+                    print (cenario_atual['titulo'])
+                    print ("-"*len(cenario_atual['descricao']))
+                    print (cenario_atual['descricao'])
+                    print ("-"*len(cenario_atual['descricao']))
+                    print()
+                
                 if escolha == "sala secreta":
                     print() 
                     print ("-"*len(cenario_atual['titulo']))
@@ -213,11 +222,11 @@ def main():
                             while b<1 or b>20:
                                 print("Valor invalido")
                                 b=int(input("Digite um valor entre 1 e 20: "))
-                        if contador == 6:
+                        if contador == 5:
                             print("Que pena, o veterano ficou consciente e te devorou!")
                             game_over = True
                         elif b==n:
-                            print("Você acertou em {0} tentativas. Agora você poderá passar pelo tobogã".format(contador))
+                            print("Você acertou em {0} tentativas. Agora voce podera passar pelo tobogã".format(contador))
                             
                 if escolha == "biblioteca":
                     print() 
