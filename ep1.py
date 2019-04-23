@@ -217,7 +217,7 @@ def main():
                             print("Que pena, o veterano ficou consciente e te devorou!")
                             game_over = True
                         elif b==n:
-                            print("Você acertou em {0} tentativas. Agora voce podera passar pelo tobogã".format(contador))
+                            print("Você acertou em {0} tentativas. Agora você poderá passar pelo tobogã".format(contador))
                             
                 if escolha == "biblioteca":
                     print() 
@@ -280,6 +280,7 @@ def main():
                     else:
                         print ("Você ainda não tem o que é necessário para entrar no andar do professor")
                         print ("Você retornará ao início e poderá refletir sobre como entrar na sala...")
+                        print ("Dica: o professor é muito baladeiro!")
                         nome_cenario_atual = "inicio"
                         
                 if escolha == "professor": 
